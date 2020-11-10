@@ -7,11 +7,9 @@ import random
 
 if __name__ == "__main__":
 
-    card:[Card] = []
-    print(card)
-    player1 = Player("player1", card, 0, [], [])
-    player2 = Player("player2", card, 0, [], [])
-    player3 = Player("player3", card, 0, [], [])
-    player4 = Player("player4", card, 0, [], [])
-    player5 = Player("player5", card, 0, [], [])
+    player1 = Player("player1", [], 0, [], [])
+    player2 = Player("player2", [], 0, [], [])
+    player3 = Player("player3", [], 0, [], [])
+    player4 = Player("player4", [], 0, [], [])
+    player5 = Player("player5", [], 0, [], [])
     Board([player1, player2, player3, player4, player5], 0, [], []).start_game()
