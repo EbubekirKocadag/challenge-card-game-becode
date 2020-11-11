@@ -18,7 +18,10 @@ class Board:
         finished = False
         while finished == False:
             for player in players:
-                player.play(player.cards)
+                if player.name == "player1":
+                    player.play(player.cards)
+                else:
+                    player.play(player.cards, players[0].history[len(players[0].history)-1])
                 self.active_cards.append(player.history[self.turn_count])
                 if players[len(players)-1].cards == []:
                     finished = True

@@ -9,19 +9,33 @@ class Player:
         self.turn_count = turn_count
         self.number_of_cards = number_of_cards
         self.history = history
-    def play(self, cards):
+    def play(self, cards, player1_played = ""):
         #From a list of cards we choose randomly one card and pop it
-        #if self.name != "player1":
-        i = random.randint(0, (len(cards)-1))
-        #else:
-            #print(len(self.cards))
-            #i = int(input("wich card?: "))
+        if self.name != "player1":
+            color = player1_played
+            #verify if there is the same color in the deck
+            list_of_card = [list_of_card for list_of_card in cards if color[0] in list_of_card]
+            if len(list_of_card) != 0:
+                #if there is try to find out the index
+                indexOfCard = [[y,cards.index(y)] for y in cards if y in list_of_card]
+                #play the first one, i could try to find out how to compare and play the biggest but that's enough for me
+                i = indexOfCard[0][1]
+            else:
+                #if there is not a same color then play anything else
+                i = random.randint(0, (len(cards)-1))
+        else:
+            print(self.cards)
+            #if it's player one who playes, then ask with card he want to play, if he gives a int out af the range then ask again
+            i = int(input("which card?: "))
+            if i >= len(self.cards):
+                i = int(input("Out of range, choose between 0 and {}: ".format(len(self.cards)-1)))
         card: Card = cards[i]
         self.cards.pop(i)
         self.history.append(card)
         self.turn_count +=1
         print(f"{self.name} {self.turn_count} played: {card[0]} {card[1]}")
         return card
+        
     def __srt__(self):
         return (f"{self.cards}, {self.turn_count}, {self.number_of_cards}, {self.history}")
 class Deck(Card):
